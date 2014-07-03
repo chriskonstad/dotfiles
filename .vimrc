@@ -117,10 +117,14 @@ else
 
 endif " has("autocmd")
 
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set autoindent
 set expandtab
+set cindent
+set list listchars=tab:»·,trail:·
+set shiftwidth=4
+set tabstop=4
+
+execute pathogen#infect()
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
