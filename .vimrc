@@ -126,6 +126,14 @@ set tabstop=4
 
 execute pathogen#infect()
 
+" Easily change buffers
+:nnoremap <F5> :buffers<CR>:buffer<Space>
+
+" GCC Syntastic code
+let g:syntastic_c_checker_header = 1
+
+
+
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
