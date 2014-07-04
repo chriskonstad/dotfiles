@@ -19,33 +19,6 @@ endif
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" Setup Vundle
-filetype off    " required
-" set runtime path to include Vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-call vundle#end()
-filetype plugin indent on
-
-" vim powerline
-set guifont=Inconsolata\ for\ Powerline:h15
-let g:Powerline_symbols = 'fancy'
-set encoding=utf-8
-set t_Co=256
-set fillchars+=stl:\ ,stlnc:\
-set term=xterm-256color
-set termencoding=utf-8
-set laststatus=2
-
-if has("gui_running")
-    let s:uname = system("uname")
-    if s:uname == "Darwin\n"
-        set guifont=Inconsolata\ for\ Powerline:h15
-    endif
-endif
-
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
@@ -117,12 +90,17 @@ else
 
 endif " has("autocmd")
 
+" Indentation
 set autoindent
 set expandtab
 set cindent
 set list listchars=tab:»·,trail:·
 set shiftwidth=4
 set tabstop=4
+
+" Mark end max width
+set colorcolumn=80
+set textwidth=79
 
 execute pathogen#infect()
 
