@@ -12,6 +12,7 @@ fi
 #Add option to avoid history
 export HISTCONTROL=ignorespace
 export HISTCONTROL=ignoredups
+shopt -s histverify
 
 #Add colors to terminal
 export CLICOLOR=1

@@ -48,10 +48,17 @@ Helptags
 au VimEnter * RainbowParenthesesToggleAll
 
 " GCC Syntastic code
-let g:syntastic_c_checker_header = 1
+" let g:syntastic_c_checker_header = 1
 
 set tags=./tags;$HOME   " auto-find tags, up to home if sub directory
 
 " force syntax highlighting
 au BufRead,BufNewFile *.md set filetype=markdown
 au BufRead,BufNewFile *.ts set filetype=javascript
+
+" Setup YouCompleteMe
+let g:ycm_extra_conf_globalist = ['~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/*','!~/*']
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+set completeopt-=preview
+let g:ycm_add_preview_to_completeopt = 0
+au BufRead,BufNewFile *.cpp let g:ycm_show_diagnostics_ui = 0
