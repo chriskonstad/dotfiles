@@ -51,3 +51,7 @@ au VimEnter * RainbowParenthesesToggleAll
 let g:syntastic_c_checker_header = 1
 
 set tags=./tags;$HOME   " auto-find tags, up to home if sub directory
+
+" force syntax highlighting
+au BufRead,BufNewFile *.md set filetype=markdown
+au BufRead,BufNewFile *.ts set filetype=javascript
