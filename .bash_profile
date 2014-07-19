@@ -38,3 +38,6 @@ echo -en "\007"
 
 export PATH=$PATH:/Applications/microchip/xc8/v1.31/bin
 export PATH=/usr/local/bin:$PATH
+
+#Include settings from .bashrc
+source ~/.bashrc

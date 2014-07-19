@@ -26,6 +26,16 @@ set tabstop=4
 set textwidth=79
 set colorcolumn=80
 
+let os=substitute(system('uname'), '\n', '', '')
+if os == 'Darwin' || os == 'Mac'
+    " Set the color scheme for the popup menu
+    highlight Pmenu ctermfg=black ctermbg=lightblue
+    highlight PmenuSel ctermfg=black ctermbg=lightgreen
+
+    " Set the highlight color scheme
+    highlight Visual ctermfg=lightblue ctermbg=white
+endif
+
 " Setup backup directory
 if has("vms")
     set nobackup " user versions instead
