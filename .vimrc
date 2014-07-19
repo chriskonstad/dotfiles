@@ -47,6 +47,10 @@ Helptags
 " Configure rainbow parentheses
 au VimEnter * RainbowParenthesesToggleAll
 
+" Configure multiple cursors
+let g:multi_cursor_exit_from_visual_mode = 0
+let g:multi_cursor_exit_from_insert_mode = 0
+
 " GCC Syntastic code
 " let g:syntastic_c_checker_header = 1
 
