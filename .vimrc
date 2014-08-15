@@ -14,7 +14,6 @@ set mouse=a
 set number
 set relativenumber
 set wildmenu
-set clipboard=unnamed
 
 " Set up tabs and whitespace display
 set autoindent
