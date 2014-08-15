@@ -14,6 +14,9 @@ set mouse=a
 set number
 set relativenumber
 set wildmenu
+syntax enable
+set background=dark
+colorscheme solarized
 
 " Set up tabs and whitespace display
 set autoindent
