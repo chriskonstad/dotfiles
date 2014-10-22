@@ -97,3 +97,7 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/
 set completeopt-=preview
 let g:ycm_add_preview_to_completeopt = 0
 au BufRead,BufNewFile *.cpp let g:ycm_show_diagnostics_ui = 0
+
+" Setup CtrlP
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
