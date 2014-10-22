@@ -27,7 +27,7 @@ set shiftwidth=4
 set tabstop=4
 
 " Set up the color column
-set textwidth=79
+"set textwidth=79
 set colorcolumn=80
 
 let os=substitute(system('uname'), '\n', '', '')
