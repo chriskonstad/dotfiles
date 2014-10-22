@@ -2,6 +2,7 @@ set nocompatible
 set shell=bash
 set fileformats=unix
 set ignorecase
+set smartcase
 
 set backspace=eol,start,indent
 
