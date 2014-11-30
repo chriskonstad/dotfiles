@@ -104,6 +104,23 @@ set completeopt-=preview
 let g:ycm_add_preview_to_completeopt = 0
 au BufRead,BufNewFile *.cpp let g:ycm_show_diagnostics_ui = 0
 
+" Setup UltiSnips
+let g:UltiSnipsExpandTrigger = '<C-@>' " terminals send C-@ when C-Space is pressed
+let g:UltiSnipsSnippetDir="~/.vim/UltiSnips"
+let g:UltiSnipsSnippetDirectories  = ["UltiSnips"]
+function! g:UltiSnips_Complete()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+        call UltiSnips#JumpForwards()
+        if g:ulti_jump_forwards_res == 0
+            return ""  " nothing more to do
+        endif
+    endif
+    return ""
+endfunction
+
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+
 " Setup CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
