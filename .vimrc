@@ -18,6 +18,7 @@ set wildmenu
 syntax enable
 set background=dark
 colorscheme solarized
+set display+=lastline
 
 " Set up tabs and whitespace display
 set autoindent
@@ -25,6 +26,11 @@ set expandtab
 set list listchars=tab:»·,trail:·
 set shiftwidth=4
 set tabstop=4
+
+" Moving Around
+" Treat long lines as break lines
+map j gj
+map k gk
 
 " Set up the color column
 "set textwidth=79

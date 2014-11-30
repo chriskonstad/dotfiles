@@ -1,4 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/Volumes/Data/chris/Dropbox/School/Frosh/CS33/CS 33 Finals'
-let g:netrw_dirhist_2='/home/chris/monterey/Monterey/extraclasses/QVectorDrive2'
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Volumes/Data/chris'
+let g:netrw_dirhist_2='/Volumes/Data'
+let g:netrw_dirhist_3='/Volumes'
+let g:netrw_dirhist_4='/'
