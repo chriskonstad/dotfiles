@@ -318,4 +318,21 @@ snippet inheritdoc "@inheritdoc docblock"
  */
 endsnippet
 
+snippet ascdb "asc database"
+<?php
+   include '${1:../database.php}';
+   mysql_connect("${2:localhost}", ${3:$username}, ${4:$password});
+   mysql_select_db(${5:$database}) or die("Unable to select database");
+
+   $results = mysql_query(${6:"SELECT * FROM *"});
+
+   $numItems = mysql_numrows($results);
+   $i=0;
+   while($i < $numItems) {
+
+       $i++;
+   }
+?>
+endsnippet
+
 # :vim:ft=snippets:
