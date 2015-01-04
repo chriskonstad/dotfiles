@@ -20,6 +20,11 @@ set background=dark
 colorscheme solarized
 set display+=lastline
 
+" Configure Lightline
+let g:lightline = {
+    \ 'colorscheme': 'solarized',
+    \ }
+
 " Set up tabs and whitespace display
 set autoindent
 set expandtab
