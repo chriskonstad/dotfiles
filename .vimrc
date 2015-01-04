@@ -56,6 +56,9 @@ endif
 
 set ruler
 
+" Set up the clipboard, at least on osx
+set clipboard=unnamed
+
 " Install pathogen
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
@@ -124,3 +127,11 @@ au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:U
 " Setup CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+
+" Setup the MatchTagsAlways
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml': 1,
+    \ 'xml' : 1,
+    \ 'php' : 1,
+    \}
