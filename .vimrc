@@ -37,6 +37,10 @@ set tabstop=4
 map j gj
 map k gk
 
+" Fix ctrl-c differences from esc
+map  <Esc>
+map!  <Esc>
+
 " Set up the color column
 "set textwidth=79
 set colorcolumn=80
