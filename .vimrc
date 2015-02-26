@@ -3,6 +3,7 @@ set shell=bash
 set fileformats=unix
 set ignorecase
 set smartcase
+set cursorline
 
 set backspace=eol,start,indent
 
