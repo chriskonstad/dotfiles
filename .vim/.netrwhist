@@ -1,7 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/Volumes/Data/chris'
-let g:netrw_dirhist_2='/Volumes/Data'
-let g:netrw_dirhist_3='/Volumes'
-let g:netrw_dirhist_4='/'
-let g:netrw_dirhist_5='/Volumes/Data/chris/ASC/ascpi/public_html/php'
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Volumes/Data/chris/Dropbox/School/Junior/CS188/ABCs/.git/branches'
+let g:netrw_dirhist_2='/Volumes/Data/chris/Dropbox/School/Junior/CS188'
+let g:netrw_dirhist_3='/Volumes/Data/chris/ubs/ubs/config/deploy'
+let g:netrw_dirhist_4='/Volumes/Data/chris/ubs/ubs/config'
+let g:netrw_dirhist_5='/Volumes/Data/chris/Dropbox/School/Junior/CS188/ABCs/test/fixtures'
+let g:netrw_dirhist_6='/usr/share/zoneinfo'
+let g:netrw_dirhist_7='/Volumes/Data/chris/ubs/ubs/lib/assets'
+let g:netrw_dirhist_8='/Volumes/Data/chris/Dropbox/School/Junior/CS161/hw5/.git'

@@ -30,8 +30,8 @@ let g:lightline = {
 set autoindent
 set expandtab
 set list listchars=tab:»·,trail:·
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 
 " Moving Around
 " Treat long lines as break lines
@@ -41,6 +41,7 @@ map k gk
 " Fix ctrl-c differences from esc
 map  <Esc>
 map!  <Esc>
+imap jk <Esc>
 
 " Set up the color column
 "set textwidth=79
@@ -78,19 +79,19 @@ Helptags
 :nnoremap <F5> :buffers<CR>:buffer<Space>
 let g:rbpt_colorpairs = [
     \ ['brown', 'RoyalBlue3'],
-    \ ['Darkblue', 'SeaGreen3'],
     \ ['darkgray', 'DarkOrchid3'],
+    \ ['Darkblue', 'SeaGreen3'],
     \ ['darkgreen', 'firebrick3'],
     \ ['darkcyan', 'RoyalBlue3'],
-    \ ['darkred', 'SeaGreen3'],
     \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['darkred', 'SeaGreen3'],
     \ ['brown', 'firebrick3'],
     \ ['gray', 'RoyalBlue3'],
+    \ ['darkgreen', 'RoyalBlue3'],
     \ ['darkmagenta', 'DarkOrchid3'],
     \ ['Darkblue', 'firebrick3'],
-    \ ['darkgreen', 'RoyalBlue3'],
-    \ ['darkcyan', 'SeaGreen3'],
     \ ['darkred', 'DarkOrchid3'],
+    \ ['darkcyan', 'SeaGreen3'],
     \ ['red', 'firebrick3'],
     \ ]
 
