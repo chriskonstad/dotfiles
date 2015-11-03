@@ -76,7 +76,9 @@ call pathogen#infect()
 Helptags
 
 " Quickly switch between buffers
+:nnoremap <F4> :NERDTreeToggle<CR>
 :nnoremap <F5> :buffers<CR>:buffer<Space>
+:nnoremap <F6> :Tagbar<CR>
 let g:rbpt_colorpairs = [
     \ ['brown', 'RoyalBlue3'],
     \ ['darkgray', 'DarkOrchid3'],
