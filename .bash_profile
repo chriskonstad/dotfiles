@@ -17,9 +17,7 @@ shopt -s histverify
 #Add colors to terminal
 export CLICOLOR=1
 export LSCOLORS=gxfxcxdxbxegedabagaced
-#export PS1='\[\033[0;32m\]\h:\[\033[0;35\]\w \[\033[1;33\]\u\$ \[\033[00m\]'
 PS1='\[\033[00;34m\]\h:\[\033[00;32m\]\w \[\033[00;34m\]\u\[\033[00;33m\]\$ \[\033[00m\]'
-#PS1='\[\e[1;35m\][\u@\h \W]\$\[\e[0m\] '
 
 function arduinoupload() {
 #extract file from path
