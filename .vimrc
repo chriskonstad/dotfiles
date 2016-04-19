@@ -78,9 +78,26 @@ set ruler
 set clipboard=unnamed
 
 " Install pathogen
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
-Helptags
+"runtime bundle/vim-pathogen/autoload/pathogen.vim
+"call pathogen#infect()
+call plug#begin('~/.vim/plugged')
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'Valloric/MatchTagAlways'
+Plug 'benekastah/neomake'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'def-lkb/ocp-indent-vim'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'majutsushi/tagbar'
+Plug 'rhysd/vim-clang-format'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-fugitive'
+Plug 'kshenoy/vim-signature'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'christoomey/vim-tmux-navigator'
+call plug#end()
+"Helptags
 
 " Quickly switch between buffers
 :nnoremap <F4> :NERDTreeToggle<CR>
