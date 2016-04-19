@@ -80,8 +80,13 @@ set clipboard=unnamed
 " Install pathogen
 "runtime bundle/vim-pathogen/autoload/pathogen.vim
 "call pathogen#infect()
+" TODO
+" Get Neomake working for merlin (OCaml)
+" Get YouCompleteMe setup
+" YCM-generator?
 call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'jeaye/color_coded'
 Plug 'itchyny/lightline.vim'
 Plug 'Valloric/MatchTagAlways'
 Plug 'benekastah/neomake'
@@ -89,10 +94,12 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'def-lkb/ocp-indent-vim'
 Plug 'kien/rainbow_parentheses.vim'
+"Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar'
 Plug 'rhysd/vim-clang-format'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-fugitive'
+Plug 'evansalter/vim-checklist'
 Plug 'kshenoy/vim-signature'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'christoomey/vim-tmux-navigator'
@@ -103,6 +110,10 @@ call plug#end()
 :nnoremap <F4> :NERDTreeToggle<CR>
 :nnoremap <F5> :buffers<CR>:buffer<Space>
 :nnoremap <F6> :Tagbar<CR>
+
+" Enable checkbox toggling
+nnoremap <leader>ct :ChecklistToggleCheckbox<cr>
+vnoremap <leader>ct :ChecklistToggleCheckbox<cr>
 let g:rbpt_colorpairs = [
     \ ['brown', 'RoyalBlue3'],
     \ ['darkgray', 'DarkOrchid3'],
@@ -132,6 +143,7 @@ let g:multi_cursor_exit_from_insert_mode = 0
 " let g:syntastic_c_checker_header = 1
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+autocmd! BufWritePost * Neomake
 
 " Add clang formatting support
 " map to <Leader>cf in C++ code
