@@ -38,6 +38,13 @@ set tabstop=2
 map j gj
 map k gk
 
+" Auto-create tags for C/C++
+autocmd BufLeave *.c,*.cpp normal! mS
+autocmd BufLeave *.h,*.hpp normal! mH
+autocmd BufLeave makefile,Makefile,CMakeLists.txt normal! mM
+
+autocmd BufEnter *.md,*.tex set spell
+
 " Fix ctrl-c differences from esc
 map  <Esc>
 map!  <Esc>
@@ -106,12 +113,28 @@ let g:multi_cursor_exit_from_insert_mode = 0
 
 " GCC Syntastic code
 " let g:syntastic_c_checker_header = 1
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+
+" Add clang formatting support
+" map to <Leader>cf in C++ code
+autocmd FileType c,cpp,objc nnoremap <C-f> :ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <C-f> :ClangFormat<CR>
+" Toggle auto formatting:
+nmap <Leader>F :ClangFormatAutoToggle<CR>
 
 set tags=./tags;$HOME   " auto-find tags, up to home if sub directory
 
 " force syntax highlighting
 au BufRead,BufNewFile *.md set filetype=markdown
 au BufRead,BufNewFile *.ts set filetype=javascript
+
+" OCaml
+au BufRead,BufNewFile *.ml,*.mli compiler ocaml
+let g:opamshare = substitute(system('opam config var share'), '\n$', '', '''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+let g:syntastic_ocaml_checkers = ['merlin']
+"set rtp^="/Users/chris/.opam/system/share/ocp-indent/vim/indent/"
 
 " Setup YouCompleteMe
 let g:ycm_extra_conf_globalist = ['~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/*','!~/*']

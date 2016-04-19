@@ -44,3 +44,6 @@ source ~/.bashrc
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 source ~/.profile
+
+# added by Anaconda3 2.4.1 installer
+export PATH="/Users/chris/anaconda/bin:$PATH"
