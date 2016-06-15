@@ -1,5 +1,6 @@
 export PATH=/Applications/androidsdk/platform-tools:$PATH
 export PATH=/Users/chris/Qt/5.1.0/clang_64/bin:$PATH
+export PATH=/Users/chris/.cargo/bin:$PATH
 
 #Load aliases
 alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"

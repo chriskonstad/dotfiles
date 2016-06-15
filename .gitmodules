@@ -1,21 +1,6 @@
-[submodule ".vim/bundle/ultisnips"]
-	path = .vim/bundle/ultisnips
-	url = git://github.com/SirVer/ultisnips.git
 [submodule ".vim/vim-snippets"]
 	path = .vim/vim-snippets
 	url = https://github.com/honza/vim-snippets.git
-[submodule ".vim/bundle/table-mode"]
-	path = .vim/bundle/table-mode
-	url = git@github.com:dhruvasagar/vim-table-mode.git
-[submodule ".vim/bundle/vimtex"]
-	path = .vim/bundle/vimtex
-	url = http://github.com/lervag/vimtex.git
-[submodule ".vim/bundle/nerdtree"]
-	path = .vim/bundle/nerdtree
-	url = http://github.com/scrooloose/nerdtree.git
 [submodule ".vim/bundle/nerdtree-git-plugin"]
 	path = .vim/bundle/nerdtree-git-plugin
 	url = http://github.com/scrooloose/nerdtree-git-plugin.git
-[submodule ".vim/bundle/vim-clang-format"]
-	path = .vim/bundle/vim-clang-format
-	url = https://github.com/rhysd/vim-clang-format

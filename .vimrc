@@ -1,91 +1,13 @@
-set nocompatible
-set shell=bash
-set fileformats=unix
-set ignorecase
-set smartcase
-set cursorline
-
-set backspace=eol,start,indent
-
-" Set up the window
-filetype plugin indent on
-syntax on
-set hls
-set laststatus=2
-set mouse=a
-set number
-set relativenumber
-set wildmenu
-syntax enable
-set background=dark
-colorscheme solarized
-set display+=lastline
-
-" Configure Lightline
-let g:lightline = {
-    \ 'colorscheme': 'solarized',
-    \ }
-
-" Set up tabs and whitespace display
-set autoindent
-set expandtab
-set list listchars=tab:»·,trail:·
-set shiftwidth=2
-set tabstop=2
-
-" Moving Around
-" Treat long lines as break lines
-map j gj
-map k gk
-
-" Auto-create tags for C/C++
-autocmd BufLeave *.c,*.cpp normal! mS
-autocmd BufLeave *.h,*.hpp normal! mH
-autocmd BufLeave makefile,Makefile,CMakeLists.txt normal! mM
-
-autocmd BufEnter *.md,*.tex set spell
-
-" Fix ctrl-c differences from esc
-map  <Esc>
-map!  <Esc>
-imap jk <Esc>
-
-" Set up the color column
-"set textwidth=79
-set colorcolumn=80
-
-let os=substitute(system('uname'), '\n', '', '')
-if os == 'Darwin' || os == 'Mac'
-    " Set the color scheme for the popup menu
-    highlight Pmenu ctermfg=black ctermbg=lightblue
-    highlight PmenuSel ctermfg=black ctermbg=lightgreen
-
-    " Set the highlight color scheme
-    highlight Visual ctermfg=lightblue ctermbg=white
-endif
-
-" Setup backup directory
-if has("vms")
-    set nobackup " user versions instead
-else
-    set backup
-    set backupdir=~/.vimbackup
-endif
-
-set ruler
-
-" Set up the clipboard, at least on osx
-set clipboard=unnamed
-
-" Install pathogen
-"runtime bundle/vim-pathogen/autoload/pathogen.vim
-"call pathogen#infect()
 " TODO
 " Get Neomake working for merlin (OCaml)
 " Get YouCompleteMe setup
 " YCM-generator?
 call plug#begin('~/.vim/plugged')
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'rking/ag.vim'
+Plug 'Chun-Yang/vim-action-ag'
+Plug 'wincent/command-t', {
+      \ 'do': 'cd ruby/command-t && ruby extconf.rb && make'
+      \ }
 "Plug 'jeaye/color_coded'
 Plug 'itchyny/lightline.vim'
 Plug 'Valloric/MatchTagAlways'
@@ -94,17 +16,45 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'def-lkb/ocp-indent-vim'
 Plug 'kien/rainbow_parentheses.vim'
+Plug 'rust-lang/rust.vim', {'for': ['rust']}
+"Plug 'scrooloose/syntastic', {'for': ['ocaml']}
 "Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar'
 Plug 'rhysd/vim-clang-format'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-fugitive'
 Plug 'evansalter/vim-checklist'
+Plug 'mhinz/vim-grepper'
 Plug 'kshenoy/vim-signature'
+Plug 'christoomey/vim-sort-motion'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'valloric/youcompleteme'
+Plug 'racer-rust/vim-racer'
+Plug 'rdnetto/YCM-Generator'
 call plug#end()
-"Helptags
+
+" OCaml
+let g:opamshare = substitute(system('opam config var share'), '\n$', '', '''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+execute "set rtp+=" . g:opamshare . "/ocp-indent/vim"
+let g:syntastic_ocaml_checkers = ['merlin']
+au BufRead,BufNewFile *.ml,*.mli compiler ocaml
+
+" Rust
+let g:ycm_rust_src_path = '/Users/chris/Programming/rustc-1.8.0/src'
+
+" Configure Lightline
+let g:lightline = {
+    \ 'colorscheme': 'solarized',
+    \ }
+
+" Auto-create tags for C/C++
+autocmd BufLeave *.c,*.cpp normal! mS
+autocmd BufLeave *.h,*.hpp normal! mH
+autocmd BufLeave makefile,Makefile,CMakeLists.txt normal! mM
+
+autocmd BufEnter *.md,*.tex set spell
 
 " Quickly switch between buffers
 :nnoremap <F4> :NERDTreeToggle<CR>
@@ -145,6 +95,26 @@ let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 autocmd! BufWritePost * Neomake
 
+"let g:neomake_verbose = 3
+let g:neomake_verbose = 0
+let g:neomake_logfile = "/Users/chris/neomake.log"
+"let g:neomake_ocaml_echo_maker = {
+"  \ 'exe': 'fuckme'
+"  \ }
+"let g:neomake_ocaml_enabled_makers = ['echo']
+let g:neomake_ocaml_eggert_maker = {
+  \ 'exe': '/Users/chris/Programming/merlin/ocamlmerlin',
+  \ 'args': ['-syntax-check'],
+  \ 'errorformat': '%f:%l:%c:%trror: %m'
+  \ }
+let g:neomake_ocaml_enabled_makers = ['eggert']
+
+let g:neomake_cpp_veracpp_maker = {
+  \ 'exe': 'vera++',
+  \ 'args': ['-s', '-']
+  \ }
+let g:neomake_cpp_enabled_makers = ['veracpp']
+
 " Add clang formatting support
 " map to <Leader>cf in C++ code
 autocmd FileType c,cpp,objc nnoremap <C-f> :ClangFormat<CR>
@@ -158,13 +128,6 @@ set tags=./tags;$HOME   " auto-find tags, up to home if sub directory
 au BufRead,BufNewFile *.md set filetype=markdown
 au BufRead,BufNewFile *.ts set filetype=javascript
 
-" OCaml
-au BufRead,BufNewFile *.ml,*.mli compiler ocaml
-let g:opamshare = substitute(system('opam config var share'), '\n$', '', '''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
-let g:syntastic_ocaml_checkers = ['merlin']
-"set rtp^="/Users/chris/.opam/system/share/ocp-indent/vim/indent/"
-
 " Setup YouCompleteMe
 let g:ycm_extra_conf_globalist = ['~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/*','!~/*']
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
@@ -172,26 +135,8 @@ set completeopt-=preview
 let g:ycm_add_preview_to_completeopt = 0
 au BufRead,BufNewFile *.cpp let g:ycm_show_diagnostics_ui = 0
 
-" Setup UltiSnips
-let g:UltiSnipsExpandTrigger = '<C-@>' " terminals send C-@ when C-Space is pressed
-let g:UltiSnipsSnippetDir="~/.vim/UltiSnips"
-let g:UltiSnipsSnippetDirectories  = ["UltiSnips"]
-function! g:UltiSnips_Complete()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res == 0
-        call UltiSnips#JumpForwards()
-        if g:ulti_jump_forwards_res == 0
-            return ""  " nothing more to do
-        endif
-    endif
-    return ""
-endfunction
-
-au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-
-" Setup CtrlP
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
+" Make Command-t act like CtrlP
+nnoremap <C-p> :CommandT<CR>
 
 " Setup the MatchTagsAlways
 let g:mta_filetypes = {
@@ -200,3 +145,72 @@ let g:mta_filetypes = {
     \ 'xml' : 1,
     \ 'php' : 1,
     \}
+
+" Basic settings
+set nocompatible
+set shell=bash
+set fileformats=unix
+set ignorecase
+set smartcase
+set cursorline
+set hidden
+
+set backspace=eol,start,indent
+
+" Set up the window
+filetype plugin indent on
+syntax on
+set hls
+set laststatus=2
+set mouse=a
+set number
+set relativenumber
+set wildmenu
+syntax enable
+set background=dark
+colorscheme solarized
+set display+=lastline
+
+" Set up tabs and whitespace display
+set autoindent
+set expandtab
+set list listchars=tab:»·,trail:·
+set shiftwidth=2
+set tabstop=2
+
+" Moving Around
+" Treat long lines as break lines
+map j gj
+map k gk
+
+" Fix ctrl-c differences from esc
+map  <Esc>
+map!  <Esc>
+imap jk <Esc>
+
+" Set up the color column
+"set textwidth=79
+set colorcolumn=80
+
+let os=substitute(system('uname'), '\n', '', '')
+if os == 'Darwin' || os == 'Mac'
+    " Set the color scheme for the popup menu
+    highlight Pmenu ctermfg=black ctermbg=lightblue
+    highlight PmenuSel ctermfg=black ctermbg=lightgreen
+
+    " Set the highlight color scheme
+    highlight Visual ctermfg=lightblue ctermbg=white
+endif
+
+" Setup backup directory
+if has("vms")
+    set nobackup " user versions instead
+else
+    set backup
+    set backupdir=~/.vimbackup
+endif
+
+set ruler
+
+" Set up the clipboard, at least on osx
+set clipboard=unnamed
