@@ -35,6 +35,7 @@ PATH_COMPONENTS=(
 "/bin"
 "/usr/sbin"
 "/sbin"
+"$PATH"
 )
 OLD_IFS="$IFS"
 export IFS=":"
