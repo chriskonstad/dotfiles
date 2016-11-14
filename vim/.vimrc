@@ -97,7 +97,7 @@ autocmd! BufWritePost * Neomake
 
 "let g:neomake_verbose = 3
 let g:neomake_verbose = 0
-let g:neomake_logfile = "/Users/chris/neomake.log"
+"let g:neomake_logfile = "/Users/chris/neomake.log"
 "let g:neomake_ocaml_echo_maker = {
 "  \ 'exe': 'fuckme'
 "  \ }
