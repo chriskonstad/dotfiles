@@ -1,13 +1,10 @@
 " TODO
-" Get Neomake working for merlin (OCaml)
 " Get YouCompleteMe setup
 " YCM-generator?
 call plug#begin('~/.vim/plugged')
 Plug 'rking/ag.vim'
 Plug 'Chun-Yang/vim-action-ag'
-Plug 'wincent/command-t', {
-      \ 'do': 'cd ruby/command-t && ruby extconf.rb && make'
-      \ }
+Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'jeaye/color_coded'
 Plug 'itchyny/lightline.vim'
 Plug 'Valloric/MatchTagAlways'
@@ -95,26 +92,6 @@ let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 autocmd! BufWritePost * Neomake
 
-"let g:neomake_verbose = 3
-let g:neomake_verbose = 0
-"let g:neomake_logfile = "/Users/chris/neomake.log"
-"let g:neomake_ocaml_echo_maker = {
-"  \ 'exe': 'fuckme'
-"  \ }
-"let g:neomake_ocaml_enabled_makers = ['echo']
-let g:neomake_ocaml_eggert_maker = {
-  \ 'exe': '/Users/chris/Programming/merlin/ocamlmerlin',
-  \ 'args': ['-syntax-check'],
-  \ 'errorformat': '%f:%l:%c:%trror: %m'
-  \ }
-let g:neomake_ocaml_enabled_makers = ['eggert']
-
-let g:neomake_cpp_veracpp_maker = {
-  \ 'exe': 'vera++',
-  \ 'args': ['-s', '-']
-  \ }
-let g:neomake_cpp_enabled_makers = ['veracpp']
-
 " Add clang formatting support
 " map to <Leader>cf in C++ code
 autocmd FileType c,cpp,objc nnoremap <C-f> :ClangFormat<CR>
@@ -135,8 +112,11 @@ set completeopt-=preview
 let g:ycm_add_preview_to_completeopt = 0
 au BufRead,BufNewFile *.cpp let g:ycm_show_diagnostics_ui = 0
 
-" Make Command-t act like CtrlP
-nnoremap <C-p> :CommandT<CR>
+" Make Ctrlp use ag if possible
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 
 " Setup the MatchTagsAlways
 let g:mta_filetypes = {
@@ -189,7 +169,6 @@ map!  <Esc>
 imap jk <Esc>
 
 " Set up the color column
-"set textwidth=79
 set colorcolumn=80
 
 let os=substitute(system('uname'), '\n', '', '')
