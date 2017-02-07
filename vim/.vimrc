@@ -196,7 +196,7 @@ endfunction
 if has("vms")
     set nobackup " user versions instead
 else
-    call EnsureDirExists('~/.vimbackup')
+    call EnsureDirExists($HOME . '/.vimbackup')
     set backup
     set backupdir=~/.vimbackup
 endif
