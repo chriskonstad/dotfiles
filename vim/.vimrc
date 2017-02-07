@@ -181,10 +181,22 @@ if os == 'Darwin' || os == 'Mac'
     highlight Visual ctermfg=lightblue ctermbg=white
 endif
 
+function! EnsureDirExists (dir)
+  if !isdirectory(a:dir)
+    if exists("*mkdir")
+      call mkdir(a:dir,'p')
+      echo "Created directory: " . a:dir
+    else
+      echo "Please create directory: " . a:dir
+    endif
+  endif
+endfunction
+
 " Setup backup directory
 if has("vms")
     set nobackup " user versions instead
 else
+    call EnsureDirExists('~/.vimbackup')
     set backup
     set backupdir=~/.vimbackup
 endif
