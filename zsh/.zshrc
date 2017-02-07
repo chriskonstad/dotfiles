@@ -76,7 +76,7 @@ zplug "plugins/tmux", from:oh-my-zsh
 zplug "Tarrasch/zsh-colors"
 zplug "chrissicool/zsh-256color"
 zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting", nice:10
+zplug "zsh-users/zsh-syntax-highlighting", defer:3
 
 if ! zplug check --verbose; then
   printf "Install? [y/N]: "
