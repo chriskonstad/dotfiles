@@ -4,3 +4,6 @@
 [submodule ".vim/bundle/nerdtree-git-plugin"]
 	path = .vim/bundle/nerdtree-git-plugin
 	url = http://github.com/scrooloose/nerdtree-git-plugin.git
+[submodule "zsh/.zsh/zplug"]
+	path = zsh/.zsh/zplug
+	url = https://github.com/zplug/zplug

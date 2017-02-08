@@ -66,7 +66,7 @@ eval "$(rbenv init -)"
 bindkey -e
 
 # Use zplug to manage zsh plugins
-export ZPLUG_HOME=/usr/local/opt/zplug
+export ZPLUG_HOME=~/.zsh/zplug
 source $ZPLUG_HOME/init.zsh
 
 zplug "plugins/git", from:oh-my-zsh
