@@ -8,14 +8,13 @@ Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'jeaye/color_coded'
 Plug 'itchyny/lightline.vim'
 Plug 'Valloric/MatchTagAlways'
-Plug 'benekastah/neomake'
+"Plug 'benekastah/neomake'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'def-lkb/ocp-indent-vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
-"Plug 'scrooloose/syntastic', {'for': ['ocaml']}
-"Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar'
 Plug 'rhysd/vim-clang-format'
 Plug 'altercation/vim-colors-solarized'
@@ -31,15 +30,22 @@ Plug 'racer-rust/vim-racer'
 Plug 'rdnetto/YCM-Generator'
 call plug#end()
 
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 " OCaml
 let g:opamshare = substitute(system('opam config var share'), '\n$', '', '''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 execute "set rtp+=" . g:opamshare . "/ocp-indent/vim"
 let g:syntastic_ocaml_checkers = ['merlin']
 au BufRead,BufNewFile *.ml,*.mli compiler ocaml
-
-" Rust
-let g:ycm_rust_src_path = '/Users/chris/Programming/rustc-1.8.0/src'
 
 " Configure Lightline
 let g:lightline = {
@@ -51,6 +57,7 @@ autocmd BufLeave *.c,*.cpp normal! mS
 autocmd BufLeave *.h,*.hpp normal! mH
 autocmd BufLeave makefile,Makefile,CMakeLists.txt normal! mM
 
+" Enable spellchecking on tex and markdown files
 autocmd BufEnter *.md,*.tex set spell
 
 " Quickly switch between buffers
@@ -90,7 +97,7 @@ let g:multi_cursor_exit_from_insert_mode = 0
 " let g:syntastic_c_checker_header = 1
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
-autocmd! BufWritePost * Neomake
+"autocmd! BufWritePost * Neomake
 
 " Add clang formatting support
 " map to <Leader>cf in C++ code
