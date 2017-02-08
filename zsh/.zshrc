@@ -42,19 +42,30 @@ export IFS=":"
 export PATH="${PATH_COMPONENTS[*]}"
 export IFS="$OLD_IFS"
 
- # Preferred editor for local and remote sessions
- if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
- else
+ # Preferred editor for OSX vs everything else
+ if [[ `uname` == 'Darwin' ]]; then
    export EDITOR='mvim'
+ else
+   export EDITOR='vim'
  fi
 
 # Setup solarized colors for ls
-eval `gdircolors ~/.zsh/dircolors.256dark`
-if [[ `uname` == 'Darwin' ]]
-then
-  alias ls="gls --color=auto"
-fi
+solarized_colors() {
+  DIRCOLORS="dircolors"
+  LS="ls"
+  if [[ `uname` == 'Darwin' ]]
+  then
+    LS="gls"
+    DIRCOLORS="gdircolors"
+  elif [[ `uname` == 'Linux' ]]
+  then
+    # Nothing special for linux :)
+  fi
+
+  eval $($DIRCOLORS "$HOME/.zsh/dircolors.256dark")
+  alias ls="$LS --color=auto"
+}
+solarized_colors
 
 # OPAM configuration
 . /Users/chris/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
@@ -68,14 +79,18 @@ eval "$(rbenv init -)"
 # Enable emacs bindings
 bindkey -e
 
+command_exists() {
+  type "$1" > /dev/null
+}
+
 # Use zplug to manage zsh plugins
 export ZPLUG_HOME=~/.zsh/zplug
 source $ZPLUG_HOME/init.zsh
 
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/heroku", from:oh-my-zsh
+zplug "plugins/git", from:oh-my-zsh, if:"command_exists git"
+zplug "plugins/heroku", from:oh-my-zsh, if:"command_exists heroku"
 zplug "plugins/osx", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
-zplug "plugins/tmux", from:oh-my-zsh
+zplug "plugins/tmux", from:oh-my-zsh, if:"command_exists tmux"
 zplug "Tarrasch/zsh-colors"
 zplug "chrissicool/zsh-256color"
 zplug "zsh-users/zsh-autosuggestions"
