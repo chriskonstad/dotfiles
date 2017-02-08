@@ -51,7 +51,10 @@ export IFS="$OLD_IFS"
 
 # Setup solarized colors for ls
 eval `gdircolors ~/.zsh/dircolors.256dark`
-alias ls="gls --color=auto"
+if [[ `uname` == 'Darwin' ]]
+then
+  alias ls="gls --color=auto"
+fi
 
 # OPAM configuration
 . /Users/chris/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
