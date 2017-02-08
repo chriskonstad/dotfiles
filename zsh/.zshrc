@@ -4,6 +4,10 @@ source ~/.zsh/theme.zsh
 # Load custom functions
 source ~/.zsh/functions.zsh
 
+command_exists() {
+  type "$1" > /dev/null
+}
+
 # Configure history
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000000
@@ -25,21 +29,20 @@ PATH_ADD () {
   export PATH="$1:$PATH"
 }
 
+PATH_ADD "/sbin"
+PATH_ADD "/usr/sbin"
+PATH_ADD "/bin"
+PATH_ADD "/usr/bin"
+PATH_ADD "/usr/local/bin"
+PATH_ADD "$HOME/.cargo/bin"
+PATH_ADD "$HOME/bin"
+
 if [[ `uname` == 'Darwin' ]]; then
   PATH_ADD "/Library/TeX/texbin"
   PATH_ADD "/Applications/android-sdk-macosx/ndk-bundle"
   PATH_ADD "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin"
   PATH_ADD "/Applications/androidsdk/platform-tools"
 fi
-
-PATH_ADD "$HOME/bin"
-PATH_ADD "$HOME/.cargo/bin"
-PATH_ADD "/usr/local/bin"
-PATH_ADD "/usr/bin"
-PATH_ADD "/bin"
-PATH_ADD "/usr/sbin"
-PATH_ADD "/sbin"
-PATH_ADD "$PATH"
 
 # Preferred editor for OSX vs everything else
 if [[ `uname` == 'Darwin' ]]; then
@@ -67,17 +70,17 @@ solarized_colors() {
 solarized_colors
 
 # OPAM configuration
-. /Users/chris/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+if command_exists opam; then
+  . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+fi
 
 # rbenv configuration
-eval "$(rbenv init -)"
+if command_exists rbenv; then
+  eval "$(rbenv init -)"
+fi
 
 # Enable emacs bindings
 bindkey -e
-
-command_exists() {
-  type "$1" > /dev/null
-}
 
 # Use zplug to manage zsh plugins
 export ZPLUG_HOME=~/.zsh/zplug
