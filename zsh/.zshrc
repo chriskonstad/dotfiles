@@ -21,33 +21,32 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 
 # Custom PATH
-PATH_COMPONENTS=(
-"/Users/chris/bin"
-"/Users/chris/.cargo/bin"
-"/Library/TeX/texbin"
-"/Users/chris/.rvm/bin"
-"/usr/local/Cellar/emacs/24.5/bin"
-"/Applications/android-sdk-macosx/ndk-bundle"
-"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin"
-"/Applications/androidsdk/platform-tools"
-"/usr/local/bin"
-"/usr/bin"
-"/bin"
-"/usr/sbin"
-"/sbin"
-"$PATH"
-)
-OLD_IFS="$IFS"
-export IFS=":"
-export PATH="${PATH_COMPONENTS[*]}"
-export IFS="$OLD_IFS"
+PATH_ADD () {
+  export PATH="$1:$PATH"
+}
 
- # Preferred editor for OSX vs everything else
- if [[ `uname` == 'Darwin' ]]; then
-   export EDITOR='mvim'
- else
-   export EDITOR='vim'
- fi
+if [[ `uname` == 'Darwin' ]]; then
+  PATH_ADD "/Library/TeX/texbin"
+  PATH_ADD "/Applications/android-sdk-macosx/ndk-bundle"
+  PATH_ADD "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin"
+  PATH_ADD "/Applications/androidsdk/platform-tools"
+fi
+
+PATH_ADD "$HOME/bin"
+PATH_ADD "$HOME/.cargo/bin"
+PATH_ADD "/usr/local/bin"
+PATH_ADD "/usr/bin"
+PATH_ADD "/bin"
+PATH_ADD "/usr/sbin"
+PATH_ADD "/sbin"
+PATH_ADD "$PATH"
+
+# Preferred editor for OSX vs everything else
+if [[ `uname` == 'Darwin' ]]; then
+  export EDITOR='mvim'
+else
+  export EDITOR='vim'
+fi
 
 # Setup solarized colors for ls
 solarized_colors() {
@@ -69,9 +68,6 @@ solarized_colors
 
 # OPAM configuration
 . /Users/chris/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-
-# Racer configuration
-export RUST_SRC_PATH=/Users/chris/Programming/rustc-1.8.0/src
 
 # rbenv configuration
 eval "$(rbenv init -)"
