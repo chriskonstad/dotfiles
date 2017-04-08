@@ -47,8 +47,10 @@ fi
 # Preferred editor for OSX vs everything else
 if [[ `uname` == 'Darwin' ]]; then
   export EDITOR='mvim'
+  export VISUAL='mvim'
 else
   export EDITOR='vim'
+  export VISUAL='vim'
 fi
 
 # Setup solarized colors for ls

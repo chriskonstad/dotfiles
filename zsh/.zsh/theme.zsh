@@ -1,6 +1,11 @@
 # Custom prompt
 # Colors from https://github.com/Tarrasch/zsh-colors
-ZSH_USER="%F{cyan}[%n@%m]%F{reset}"
+
+hostcolor='cyan'
+if [ `hostname` != 'mbp.local' ]; then
+  hostcolor='magenta'
+fi
+ZSH_USER="%F{cyan}[%n@%F{$hostcolor}%m]%F{reset}"
 ZSH_DIR="%F{yellow}[%1~% ]%F{reset}"
 ZSH_PROMPT_END="%F{white}$ %F{reset}"
 
